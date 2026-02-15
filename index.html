@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicByte - Civic Issue Reporting</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+
+<header class="navbar">
+  <div class="logo">
+    <span class="icon"></span>
+    <span class="brand"><i class="fas fa-shield-alt me-2"></i>CivicByte</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#issues">View Issues</a>
+    <a href="#report">Report Issue</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="nav-auth">
+    <span id="userWelcome" class="welcome-text"></span>
+
+    <!-- ✅ Login opens only when clicked -->
+    <a id="loginNavBtn" href="login.html" class="nav-btn">Login</a>
+
+    <!-- ✅ Logout -->
+    <button id="logoutBtn" class="nav-btn danger" style="display:none;">Logout</button>
+  </div>
+</header>
+
+  <!-- HOME SECTION -->
+  <section id="home" class="section hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+      <h1>CivicByte <span> <br>Civic Issue Reporting Platform</span></h1>
+      <p>Empowering citizens to report issues and track solutions in their local communities.</p>
+
+      <div class="hero-buttons">
+        <a href="#report" class="btn primary">Report Issue</a>
+        <a href="#issues" class="btn danger">View Issues</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SECTION -->
+  <section class="section dashboard">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Reports</h3>
+        <p id="totalReports">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Active Issues</h3>
+        <p id="activeIssues">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Pending</h3>
+        <p id="pendingIssues">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>In Progress</h3>
+        <p id="inProgressIssues">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Resolved</h3>
+        <p id="resolvedIssues">0</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURES -->
+  <section class="section features" id="features">
+    <h2>Key Features</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>📸 Report Issues with Photos</h3>
+        <p>Upload clear evidence, so authorities can understand faster.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📍 Location-based Reports</h3>
+        <p>Pinpoint the exact location of the issue on a map.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📊 Track Issue Status</h3>
+        <p>Monitor progress from Pending → In Progress → Resolved.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔔 Real-time Updates</h3>
+        <p>See live dashboard counters update instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW ISSUES SECTION -->
+  <section id="issues" class="section issues">
+    <h2>Community Issues Tracker</h2>
+
+    <div class="filters">
+      <input type="text" id="searchIssue" placeholder="Search issues by title or description..." />
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Roads">Roads</option>
+        <option value="Garbage">Garbage</option>
+        <option value="Electricity">Electricity</option>
+        <option value="Water">Water</option>
+        <option value="Public Safety">Public Safety</option>
+      </select>
+
+      <select id="statusFilter">
+        <option value="All">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <!-- <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option> -->
+      </select>
+
+      <select id="priorityFilter">
+        <option value="All">All Priorities</option>
+        <option value="High">High Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="Low">Low Priority</option>
+      </select>
+    </div>
+
+    <div id="issuesGrid" class="issues-grid"></div>
+  </section>
+
+  <!-- REPORT ISSUE SECTION -->
+  <section id="report" class="section report">
+    <h2>⚠️ Report a Civic Issue</h2>
+
+    <div class="report-box">
+
+      <label>Issue Title</label>
+      <input type="text" id="issueTitle" placeholder="Enter issue title" />
+
+      <label>Category</label>
+      <select id="issueCategory">
+        <option value="">Select Category</option>
+        <option>Roads</option>
+        <option>Garbage</option>
+        <option>Water</option>
+        <option>Electricity</option>
+        <option>Public Safety</option>
+        <option>Others..</option>
+      </select>
+
+      <label>Priority</label>
+      <select id="issuePriority">
+        <option value="">Select Priority</option>
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+      </select>
+
+      <label>Location (Text)</label>
+      <input type="text" id="issueLocation" placeholder="Example: Main Street, Near Bus Stop" />
+
+      <label>Description</label>
+      <textarea id="issueDesc" placeholder="Describe the issue..."></textarea>
+
+      <label>Upload Photo (Camera / Gallery)</label>
+      <input type="file" id="issueImage" accept="image/*" capture="environment" />
+
+      <div class="preview-box">
+        <p class="preview-title">Image Preview</p>
+        <img id="imagePreview" src="" alt="Preview" style="display:none;" />
+      </div>
+
+      <div class="location-box">
+        <h4>Auto-detected Location</h4>
+        <p id="autoLocation">Fetching location...</p>
+        <p id="autoCoords">Lat: -- | Lng: --</p>
+
+        <div class="map-box">
+          <iframe
+            id="mapFrame"
+            width="100%"
+            height="220"
+            style="border:0; border-radius:12px;"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=26.257,78.220&z=14&output=embed">
+          </iframe>
+        </div>
+      </div>
+
+      <button class="btn primary full" id="submitIssue">Submit Issue ✅</button>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="section about">
+    <h2>👥 About CivicByte</h2>
+
+    <div class="about-card">
+      <h3>💡 Our Purpose</h3>
+      <p>
+        CivicByte is a Civic Issue Reporting & Resolution System built to bridge the communication gap
+        between citizens and local authorities. Our platform provides a simple, transparent, and efficient way
+        to report civic issues — from potholes to broken streetlights.
+      </p>
+
+      <div class="about-grid">
+        <div>
+          <h4>🚀 Our Mission</h4>
+          <p>To create a transparent ecosystem where every civic issue is logged, tracked, and resolved fast.</p>
+        </div>
+        <div>
+          <h4>👁️ Our Vision</h4>
+          <p>To be the leading platform for community-driven city maintenance.</p>
+        </div>
+      </div>
+      <br>
+      <br>
+      <a href="#issues" class="btn primary">See Issues in Action →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="about" class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h5><i class="fas fa-shield-alt me-2"></i>CivicByte</h5>
+          <p>Empowering citizens to fix civic issues with AI & real-time tracking.</p>
+        </div>
+        <div class="col-lg-2 col-md-6"><!--for product-->
+          <h6>Product</h6>
+          <ul class="list-unstyled">
+            <li><a style="text-decoration: none;" href="#" class="text-white-50">Report Issue</a></li>
+           
+            <li><a style="text-decoration: none;" href="#stats" class="text-white-50">Dashboard</a></li>
+            <li><a style="text-decoration: none;" href="#" class="text-white-50">Track Progress</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6"><!--for compony-->
+          <h6>Company</h6>
+          <ul class="list-unstyled">
+            <li><a style="text-decoration: none;" href="#" class="text-white-50">About</a></li>
+            <li><a style="text-decoration: none;" href="#" class="text-white-50">Team</a></li>
+            <li><a style="text-decoration: none;" href="#" class="text-white-50">Parul</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4"><!--for contact-->
+          <h6>Contact</h6>
+          <p><i class="fas fa-envelope me-2"></i>hello@civicbyte.in</p>
+          <p><i class="fas fa-map-marker-alt me-2"></i>Parul University</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center"><!--for main -->
+        <p>&copy; 2026 CivicByte. Built by Akshat Keshari.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
